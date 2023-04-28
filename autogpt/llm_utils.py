@@ -210,48 +210,6 @@ def create_chat_completion(
     return resp
 
 
-def get_ada_embedding(text: str) -> List[float]:
-    """Get an embedding from the ada model.
-
-    Args:
-        text (str): The text to embed.
-
-    Returns:
-        List[float]: The embedding.
-    """
-    cfg = Config()
-    model = "text-embedding-ada-002"
-    text = text.replace("\n", " ")
-
-    if cfg.use_azure:
-        kwargs = {"engine": cfg.get_azure_deployment_id_for_model(model)}
-    else:
-        kwargs = {"model": model}
-
-    max_chunk_size = 8000
-
-    # Split the text into chunks of max_chunk_size tokens
-    text_chunks = []
-    text_len = len(text)
-    for i in range(0, text_len, max_chunk_size):
-        text_chunks.append(text[i:i + max_chunk_size])
-
-    # Generate embeddings for each chunk
-    chunk_embeddings = []
-    for chunk in text_chunks:
-        embedding = create_embedding(chunk, **kwargs)
-        api_manager.update_cost(
-            prompt_tokens=embedding.usage.prompt_tokens,
-            completion_tokens=0,
-            model=model,
-        )
-        chunk_embeddings.append(embedding["data"][0]["embedding"])
-
-    # Calculate the average embedding
-    avg_embedding = np.mean(chunk_embeddings, axis=0).tolist()
-    return avg_embedding
-
-
 # def get_ada_embedding(text: str) -> List[float]:
 #     """Get an embedding from the ada model.
 
@@ -270,13 +228,55 @@ def get_ada_embedding(text: str) -> List[float]:
 #     else:
 #         kwargs = {"model": model}
 
-#     embedding = create_embedding(text, **kwargs)
-#     api_manager.update_cost(
-#         prompt_tokens=embedding.usage.prompt_tokens,
-#         completion_tokens=0,
-#         model=model,
-#     )
-#     return embedding["data"][0]["embedding"]
+#     max_chunk_size = 8000
+
+#     # Split the text into chunks of max_chunk_size tokens
+#     text_chunks = []
+#     text_len = len(text)
+#     for i in range(0, text_len, max_chunk_size):
+#         text_chunks.append(text[i:i + max_chunk_size])
+
+#     # Generate embeddings for each chunk
+#     chunk_embeddings = []
+#     for chunk in text_chunks:
+#         embedding = create_embedding(chunk, **kwargs)
+#         api_manager.update_cost(
+#             prompt_tokens=embedding.usage.prompt_tokens,
+#             completion_tokens=0,
+#             model=model,
+#         )
+#         chunk_embeddings.append(embedding["data"][0]["embedding"])
+
+#     # Calculate the average embedding
+#     avg_embedding = np.mean(chunk_embeddings, axis=0).tolist()
+#     return avg_embedding
+
+
+def get_ada_embedding(text: str) -> List[float]:
+    """Get an embedding from the ada model.
+
+    Args:
+        text (str): The text to embed.
+
+    Returns:
+        List[float]: The embedding.
+    """
+    cfg = Config()
+    model = "text-embedding-ada-002"
+    text = text.replace("\n", " ")
+
+    if cfg.use_azure:
+        kwargs = {"engine": cfg.get_azure_deployment_id_for_model(model)}
+    else:
+        kwargs = {"model": model}
+
+    embedding = create_embedding(text, **kwargs)
+    api_manager.update_cost(
+        prompt_tokens=embedding.usage.prompt_tokens,
+        completion_tokens=0,
+        model=model,
+    )
+    return embedding["data"][0]["embedding"]
 
 
 @retry_openai_api()
