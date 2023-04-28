@@ -1,0 +1,26 @@
+
+
+https://significant-gravitas.github.io/Auto-GPT/installation/
+
+docker-compose build auto-gpt
+docker-compose run --rm auto-gpt
+
+############################### straight from unsplit papers ##################################################
+
+Please analyze the text files in the 'papers_txt' folder. Examine the content of every text file individually at first, references, and any relevant web sources for each part individually to conduct an in-depth literature review for my doctoral project. Generate a report in text format that encompasses an overview of the current state of the field, significant findings, and a list of intriguing problems or challenges for ML engineers to address.
+
+#### 5
+
+The literature review should begin with an introduction that provides an overview of the field and the purpose of the review. A clear and concise summary of the key findings and insights from the literature should be included, organized by topic or theme. A discussion of the major trends and patterns identified in the literature should be provided, highlighting areas of agreement and disagreement among researchers. Gaps in the literature and potential areas for future research should be identified, as well as any challenges or limitations that may need to be addressed. The language used should be clear and concise, avoiding jargon or technical terms that may be unfamiliar to the reader. Finally, all sources should be cited using an appropriate citation format, such as APA or MLA.
+
+## test 10
+
+Analyze the text files in the 'papers_txt' folder, examining each part individually, references, and relevant web sources to conduct an in-depth literature review for a doctoral project. Generate a comprehensive report 'literature_review.pdf' that provides an overview of the current state of the field, summarizes key findings, and identifies intriguing problems or challenges for ML engineers to address. The report should be well-organized and use clear and concise language, avoiding jargon or technical terms that may be unfamiliar to the reader. Citations should be included using an appropriate format, such as APA or MLA. To output the findings to a PDF file, use the 'write_to_file' command with the filename 'literature_review.pdf' and the format argument set to 'pdf'. This will create a PDF file containing the literature review report
+
+### JSON NLP test simple
+
+The outputs are JSON files containing the results of NLP analysis of research papers. They contain information such as the tokens, part-of-speech tags, named entities, abbreviations, and keywords extracted from the papers. The JSON files are named after the original papers with "_nlp_results.json" appended to the end, and are stored in a folder named "papers_json". Analyze the json files in the 'papers_json' folder, examining each part individually. I need you to become a domain expert on the field described by the NLP analysis.
+
+### JSON NLP test
+
+The outputs are JSON files containing the results of NLP analysis of research papers. They contain information such as the tokens, part-of-speech tags, named entities, abbreviations, and keywords extracted from the papers. The JSON files are stored in a folder named "papers_json". Analyze the json files in the 'papers_json' folder, examining each part individually, references, and relevant web sources to conduct an in-depth literature review for a doctoral project. Generate a comprehensive report 'literature_review.pdf' that provides an overview of the current state of the field, summarizes key findings, and identifies intriguing problems or challenges for ML engineers to address. The report should be well-organized and use clear and concise language, avoiding jargon or technical terms that may be unfamiliar to the reader. Citations should be included using an appropriate format, such as APA. To output the findings to a PDF file, use the 'write_to_file' command with the filename 'literature_review.pdf' and the format argument set to 'pdf'. This will create a PDF file containing the literature review report
